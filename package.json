@@ -1,0 +1,27 @@
+{
+  "name": "mqtt_message_handler",
+  "version": "1.0.0",
+  "description": "this  lambda will forward the mqtt messages to socket api.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/40582229/mqtt_message_handler.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/40582229/mqtt_message_handler/issues"
+  },
+  "homepage": "https://github.com/40582229/mqtt_message_handler#readme",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.152"
+  }
+}
