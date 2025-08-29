@@ -42,12 +42,3 @@ jobs:
           aws lambda update-function-code \
             --function-name arn:aws:lambda:eu-west-2:942742581870:function:mqtt_message_handler \
             --zip-file fileb://function.zip
-
-      # 7️⃣ Optional: invoke Lambda to test
-      - name: Test Lambda
-        run: |
-          aws lambda invoke \
-            --function-name arn:aws:lambda:eu-west-2:942742581870:function:mqtt_message_handler \
-            --payload '{"test":"ok"}' \
-            response.json
-          cat response.json
