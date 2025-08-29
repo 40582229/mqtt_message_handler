@@ -1,0 +1,53 @@
+name: Deploy Lambda
+
+on:
+  push:
+    branches:
+      - main   # deploy on push to main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout repo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2️⃣ Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # 4️⃣ Zip Lambda package
+      - name: Zip Lambda
+        run: zip -r function.zip index.js src package.json node_modules
+
+      # 5️⃣ Configure AWS credentials
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # 6️⃣ Deploy to Lambda
+      - name: Deploy to Lambda
+        run: |
+          aws lambda update-function-code \
+            --function-name arn:aws:lambda:eu-west-2:942742581870:function:mqtt_message_handler \
+            --zip-file fileb://function.zip
+
+      # 7️⃣ Optional: invoke Lambda to test
+      - name: Test Lambda
+        run: |
+          aws lambda invoke \
+            --function-name arn:aws:lambda:eu-west-2:942742581870:function:mqtt_message_handler \
+            --payload '{"test":"ok"}' \
+            response.json
+          cat response.json
