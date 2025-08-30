@@ -1,5 +1,5 @@
-import { IoTDataPlaneClient, PublishCommand } from "@aws-sdk/client-iot-data-plane";
-import 'dotenv/config';
+const { IoTDataPlaneClient, PublishCommand } = require("@aws-sdk/client-iot-data-plane");
+require("dotenv").config(); // loads .env when running locally
 
 const client = new IoTDataPlaneClient({ region: process.env.NODE_AWS_REGION });
 
