@@ -1,1 +1,1 @@
-export default './topics';
+module.exports =  './topics';
