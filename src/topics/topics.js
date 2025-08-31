@@ -3,4 +3,4 @@ const topicObj = {
     ESP32_TO_AWS:'esp32/esp32-to-aws'
 }
 const TOPICS = Object.freeze(topicObj);
-export default TOPICS;
+module.exports = {TOPICS};

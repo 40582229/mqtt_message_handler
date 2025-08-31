@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "name": "mqtt_message_handler",
   "version": "1.0.0",
   "description": "this  lambda will forward the mqtt messages to socket api.",
