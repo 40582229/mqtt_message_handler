@@ -1,1 +1,1 @@
-module.exports =  './topics';
+module.exports =  require('./topics');;
