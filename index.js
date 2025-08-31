@@ -5,7 +5,7 @@ require("dotenv").config();
 const client = new IoTDataPlaneClient({ region: process.env.NODE_AWS_REGION });
 
 exports.handler = async (event) => {
-  const event = JSON.parse(event);
+  event = JSON.parse(event);
   if(event?.topic === TOPICS.AWS_TO_ESP32){
       const command = new PublishCommand({
       topic: process.env.NODE_AWS_IOT_TOPIC,
