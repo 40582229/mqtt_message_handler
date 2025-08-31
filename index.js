@@ -16,7 +16,7 @@ exports.handler = async (event) => {
     await client.send(command);
     console.log("Message published!");
   } else if(event?.topic === TOPICS.ESP32_TO_AWS){
-    console.log(JSON.parse(event));
+    console.log(event);
     console.log("Message received!");
   }
 
