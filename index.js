@@ -19,5 +19,5 @@ exports.handler = async (event) => {
     console.log(event);
     console.log("Message received!");
   }
-
+  return {"statusCode": 200}
 };
