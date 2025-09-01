@@ -11,7 +11,7 @@ exports.handler = async (event) => {
     const command = new PublishCommand({
       topic: TOPICS.AWS_TO_ESP32,
       qos: 1,
-      payload: Buffer.from(JSON.stringify({ message: {data:{connectionState:1}}}))
+      payload: Buffer.from(JSON.stringify({ message: {data:{connectionState:1, connectionId}}}))
     });
     await client.send(command);
     console.log("Message published!");
