@@ -6,7 +6,24 @@ const client = new IoTDataPlaneClient({ region: process.env.NODE_AWS_REGION });
 
 exports.handler = async (event) => {
   console.log("EVENT RECEIVED:",event)
-  event = Object.freeze(event);
+  const { eventType, connectionId, domainName, stage } = event.requestContext;
+  if(eventType === 'CONNECT'){
+    const command = new PublishCommand({
+      topic: TOPICS.AWS_TO_ESP32,
+      qos: 1,
+      payload: Buffer.from(JSON.stringify({ message: {data:{connectionState:1}}}))
+    });
+    await client.send(command);
+    console.log("Message published!");
+  }else if(eventType === 'DISCONNECT'){
+    const command = new PublishCommand({
+      topic: TOPICS.AWS_TO_ESP32,
+      qos: 1,
+      payload: Buffer.from(JSON.stringify({ message: {data:{connectionState:0}}}))
+    });
+    await client.send(command);
+    console.log("Message published!");
+  }
   if(event?.topic === TOPICS.AWS_TO_ESP32){
       const command = new PublishCommand({
       topic: process.env.NODE_AWS_IOT_TOPIC,
