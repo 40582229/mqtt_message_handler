@@ -12,7 +12,7 @@ const client = new IoTDataPlaneClient({ region: process.env.NODE_AWS_REGION });
 
 exports.handler = async (event) => {
   console.log("EVENT RECEIVED:", event);
-  const { eventType, connectionId, domainName, stage } = event.requestContext;
+  const { eventType, connectionId, domainName, stage } = event?.requestContext ?? {};
   if (eventType && eventType === "CONNECT") {
     const command = new PublishCommand({
       topic: TOPICS.AWS_TO_ESP32,
