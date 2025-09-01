@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/40582229/mqtt_message_handler#readme",
   "dependencies": {
+    "@aws-sdk/client-apigatewaymanagementapi": "^3.879.0",
     "@aws-sdk/client-iot-data-plane": "^3.879.0",
     "aws-iot-device-sdk": "^2.2.15",
     "aws-sdk": "^2.1692.0",
