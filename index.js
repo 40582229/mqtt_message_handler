@@ -13,7 +13,7 @@ const client = new IoTDataPlaneClient({ region: process.env.NODE_AWS_REGION });
 exports.handler = async (event) => {
   console.log("EVENT RECEIVED:", event);
   const { eventType, connectionId, domainName, stage } = event.requestContext;
-  if (eventType === "CONNECT") {
+  if (eventType && eventType === "CONNECT") {
     const command = new PublishCommand({
       topic: TOPICS.AWS_TO_ESP32,
       qos: 1,
@@ -25,7 +25,7 @@ exports.handler = async (event) => {
     });
     await client.send(command);
     console.log("Message published!");
-  } else if (eventType === "DISCONNECT") {
+  } else if (eventType && eventType === "DISCONNECT") {
     const command = new PublishCommand({
       topic: TOPICS.AWS_TO_ESP32,
       qos: 1,
@@ -55,7 +55,6 @@ exports.handler = async (event) => {
     });
 
     try {
-      // 👇 Send a message back to the client
       await client.send(
         new PostToConnectionCommand({
           ConnectionId: event.data.connectionId, // 🔑 must include the exact connectionId
