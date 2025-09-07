@@ -39,6 +39,7 @@ exports.handler = async (event) => {
   }
   if (eventType && eventType === "MESSAGE") {
     body = JSON.parse(body);
+    console.log("BODY:",body);
     if (body?.topic === TOPICS.AWS_TO_ESP32) {
       const command = new PublishCommand({
         topic: process.env.TOPICS.AWS_TO_ESP32,
