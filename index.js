@@ -38,6 +38,7 @@ exports.handler = async (event) => {
     console.log("Message published!");
   }
   if (eventType && eventType === "MESSAGE") {
+    console.log("BODY:",body);
     body = JSON.parse(body);
     console.log("BODY:",body);
     if (body?.topic === TOPICS.AWS_TO_ESP32) {
